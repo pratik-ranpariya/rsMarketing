@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<title>Rs Marketing</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/style.css">
+<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/colors/blue.css">
+<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/sweetalert.min.css">
+<style type="text/css">
+table td{
+	display: table-cell !important;
+	width: 10% !important;
+	border-bottom: none !important;
+	background-color: #eee !important;
+}
+table th{
+	display: table-cell !important;
+	width: 10% !important;
+}
+table{
+	padding: 9px !important;
+}
+.near_by_hotel_wrapper{
+	background:#f5f5f5;
+	}
+.custom_table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-top: -3px !important;
+}
+.custom_table thead tr th {
+	padding: 0px 8px;
+	font-size: 16px;
+	border: 0 none !important;
+	border-top: 0 none !important;
+}
+.custom_table tbody tr {
+    -moz-box-shadow: 0 2px 3px #e0e0e0;
+    -webkit-box-shadow: 0 2px 3px #e0e0e0;
+    box-shadow: 0 2px 3px #e0e0e0;
+}
+.near_by_hotel_wrapper table tr td {
+	border-right: 1px solid #d2d1d1;
+}
+
+.custom_table tbody tr td {
+	background: #fff none repeat scroll 0 0;
+	border-top: 0 none !important;
+	margin-bottom: 20px;
+	padding: 10px 8px;
+	font-size: 16px;
+}
+.near_by_hotel_wrapper table tr td {
+    border-right: 1px solid #d2d1d1;
+}	
+</style>
+</head>
+<body class="gray">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header Container
+================================================== -->
+<!-- <?php include('header.php');?> -->
+<%- include ('header.html'); %>
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+
+<!-- Dashboard Container -->
+<div class="dashboard-container">
+
+	<%- include ('dashboard-leftlayout.html'); %>
+	<!-- <?php include('dashboard-leftlayout.php');?> -->
+	<!-- Dashboard Content
+	================================================== -->
+	<div class="dashboard-content-container" data-simplebar>
+		<div class="dashboard-content-inner" >
+
+
+			<div class="dashboard-headline">
+				<center><h3><strong>Add Daily Collection Task</strong></h3></center>
+			</div>
+
+
+			<form action="<%=BaseUrl%>/insertparty" method="post">
+				<div class="row">
+
+					<div class="col-xl-8 offset-xl-2">
+						<div class="dashboard-box margin-top-0">
+
+							<div class="content with-padding padding-bottom-10">
+								<div class="row">
+
+									<!-- <div class="col-xl-6">
+										<div class="submit-field">
+											<h5>Party Name</h5>
+											<input type="text" value="" class="with-border" name="name" required>
+										</div>
+									</div>
+									<div class="col-xl-6">
+										<div class="submit-field">
+											<h5>Party Address</h5>
+											<input type="text" class="with-border" value="" name="address" required>
+										</div>
+									</div>
+
+									<div class="col-xl-6">
+										<div class="submit-field">
+											<h5>Party Contact</h5>
+											<input type="number" value="" class="with-border" name="contact" required>
+										</div>
+									</div> -->
+
+									
+
+									<div class="col-xl-12">
+										<div class="submit-field">
+											<h5>Select Agent</h5>
+											<select id="cars" name="agentId" required>
+												<option value="">Select Agent</option>
+												<% for(var i = 0; i < data.length; i++ ) { %>
+												<option value="<%= data[i].agentId %>"><%= data[i].name %></option>
+												<% } %>
+											  </select>
+										</div>
+									</div>
+
+									<div class="col-xl-12">
+										<div class="submit-field">
+											<h5>Select Party</h5>
+											<select id="cars" name="partyId" required>
+												<option value="">Select Party</option>
+												<% for(var i = 0; i < party.length; i++ ) { %>
+												<option value="<%= party[i].partyId %>"><%= party[i].name %></option>
+												<% } %>
+											  </select>
+										</div>
+									</div>
+
+									<div class="col-xl-12">
+										<div class="submit-field">
+											<h5>Amount</h5>
+											<input type="number" value="" class="with-border" name="amount" required>
+										</div>
+									</div>
+
+									<div class="col-xl-12">
+										<div class="submit-field">
+											<h5>Beat</h5>
+											<input type="text" value="" class="with-border" name="beat" required>
+										</div>
+									</div>
+									
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-12">
+								<center>
+									<button type="submit" class="post-service button ripple-effect big margin-top-30">Submit</button>
+								</center>
+							</div>
+						</div>
+					</form><br><br>
+					<%- include('footer.html'); %>
+				</div>
+			</div>
+
+        </div>
+</div>
+
+<script src="<%=BaseUrl%>/adminPanel/js/jquery-3.3.1.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/mmenu.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/tippy.all.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/simplebar.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/bootstrap-slider.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/bootstrap-select.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/snackbar.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/clipboard.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/counterup.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/magnific-popup.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/slick.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/custom.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/sweetalert.min.js"></script>
+
+
+<script type="text/javascript">
+
+    $(function () {
+        $('#toggleWidth').on('click', function (e) {
+            $('.multiLineLabel').toggleClass('maxWidth');
+        });
+    })
+
+</script>
+
+
+</body>
+</html>

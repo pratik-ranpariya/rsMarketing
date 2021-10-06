@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<title>Rs Marketing</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/style.css">
+<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/colors/blue.css">
+<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/sweetalert.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<style type="text/css">
+table td{
+	display: table-cell !important;
+	width: 10% !important;
+	border-bottom: none !important;
+	background-color: #eee !important;
+}
+table th{
+	display: table-cell !important;
+	width: 10% !important;
+}
+table{
+	padding: 9px !important;
+}
+.near_by_hotel_wrapper{
+	background:#f5f5f5;
+	}
+.custom_table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-top: -3px !important;
+}
+.custom_table thead tr th {
+	padding: 0px 8px;
+	font-size: 16px;
+	border: 0 none !important;
+	border-top: 0 none !important;
+}
+.custom_table tbody tr {
+    -moz-box-shadow: 0 2px 3px #e0e0e0;
+    -webkit-box-shadow: 0 2px 3px #e0e0e0;
+    box-shadow: 0 2px 3px #e0e0e0;
+}
+.near_by_hotel_wrapper table tr td {
+	border-right: 1px solid #d2d1d1;
+}
+
+.custom_table tbody tr td {
+	background: #fff none repeat scroll 0 0;
+	border-top: 0 none !important;
+	margin-bottom: 20px;
+	padding: 10px 8px;
+	font-size: 16px;
+}
+.near_by_hotel_wrapper table tr td {
+    border-right: 1px solid #d2d1d1;
+}	
+</style>
+</head>
+<body class="gray">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header Container
+================================================== -->
+<!-- <?php include('header.php');?> -->
+<%- include ('header.html'); %>
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+
+<!-- Dashboard Container -->
+<div class="dashboard-container">
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+  
+              <h5 class="modal-title" id="exampleModalLabel">Add Party</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+  
+            <form id="insert_form" method="post">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="col-form-label">Give Amount:</label>
+                    <input type="number" value="" name="amount" required>
+                </div>
+                <input type="hidden" value="" name="_id" id="_id">
+				<input type="hidden" value="">
+            
+                <div class="form-group">
+                    <label class="col-form-label">Give Notes:</label>
+                    <select id="cars" name="agentId" required>
+                        <option value="">Select Agent</option>
+                        <% for(var i=0; i < agentData.length; i++ ) { %>
+                            <option value="<%= agentData[i].agentId %>">
+                                <%= agentData[i].name %>
+                            </option>
+                            <% } %>
+                    </select>
+                </div>
+  
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" value="submit" name="submit" id="submit" class="btn btn-primary">submit</button>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+
+	<%- include ('dashboard-leftlayout.html'); %>
+	<!-- <?php include('dashboard-leftlayout.php');?> -->
+	<!-- Dashboard Content
+	================================================== -->
+	<div class="dashboard-content-container" data-simplebar>
+		<div class="dashboard-content-inner" >
+			
+			<!-- Dashboard Headline -->
+			<div class="dashboard-headline">
+				<h3>Collection List</h3>
+			</div>
+			<!-- Row -->
+		<div class="row">
+
+			<div class="col-xl-12 col-md-12 responsive">
+				<table class="table no-border custom_table dataTable no-footer dtr-inline" style="width: 100%;background-color:#fff;">
+				    <thead>
+				      <tr>
+						<th>S.No</th>
+				        <th>AgentId</th>
+						<th>Name</th>
+						<th>Beat</th>
+                        <th>Contact</th>
+				        <th>Amount</th>
+						<th>Remark</th>
+						<th>Payment Method</th>
+                        <th>Notes</th>
+				        <th>Status</th>
+						<th>CreatedBy</th>
+						<th>Date</th>
+                        <!-- <th class="text-center">Re-access</th> -->
+				      </tr>
+				    </thead>
+				    <tbody style="background-color: #eee;" id="services">
+				    	<% if (data.length > 0) { var con = 1; %>
+								<% for(var i = 0; i < data.length; i++ ) { %>
+				    			<tr>
+									<td><%= con %></td>
+					    			<td><a href="/agentDetails/<%= data[i].agentId %>"><%= data[i].agentId %></a></td>
+									<td><%= data[i].name %></td>
+									<td><%= data[i].beat%></td>
+                                    <td><%= data[i].contact %></td>
+									<td><%= data[i].amount %></td>
+									<td><%= data[i].remark === '' ? 'N/A' : data[i].remark %></td>
+                                    <td><%= data[i].paymentMenthod === '' ? 'N/A' : data[i].paymentMenthod %></td>
+									<td><%= data[i].notes === '' ? 'N/A' : data[i].notes %></td>
+									<td><%= data[i].status === 0 ? 'pending' : 'success' %></td>
+                                    <td style="color: <%= data[i].createdBy === 'agent' ? 'blue' : 'green' %>"><%= data[i].createdBy %></td>
+									<td><%= data[i].date %></td>
+
+                                    <!-- <td><center>
+                                    <button type="submit" value="submit" name="submit" id="<%=data[i]._id %>" class="btn btn-sm btn-success mymodel">use</button>
+                                    </center></td> -->
+					    		</tr>
+				    	<% con++; } }
+				    	  else
+				    	  {
+				    		%>
+				    		<tr>
+				    			<td colspan="10"><center>No Record Found!</center></td>
+				    		</tr>
+				    	<% } %>
+				    </tbody>
+				  </table>
+			</div>	
+
+		</div>
+
+		<!-- Pagination -->
+			<div class="clearfix"></div>
+						<div class="row">
+				<div class="col-md-12">
+					<!-- Pagination -->
+					<div class="pagination-container margin-top-30 margin-bottom-60">
+						<nav class="pagination">
+							<% if (pages > 0) { %>
+								<ul class="pagination justify-content-end" id="pagination">
+								  <% if (current == 1) { %>
+									<li class="disabled"><a class="btn btn-default"><i class="icon-material-outline-keyboard-arrow-left"></i></a></li>
+								  <% } else { %>
+									  <li><a class="btn btn-default" onclick="changePage('1')"><i class="icon-material-outline-keyboard-arrow-left"></i></a></li>
+								  <% } %>
+								  <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+								  <% if (i !== 1) { %>
+									  <li class="disabled"><a>...</a></li>
+								  <% } %>
+								  <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+									  <% if (i == current) { %>
+										  <li class="pagination-arrow" class="active"><a class="btn btn-default"><%= i %></a></li>
+									  <% } else { %>
+										  <li><a class="btn btn-default" onclick="changePage('<%= i %>')"><%= i %></a></li>
+									  <% } %>
+									  <% if (i == Number(current) + 4 && i < pages) { %>
+										  <li class="disabled"><a>...</a></li>
+									  <% } %>
+								  <% } %>
+								  <% if (current == pages) { %>
+									  <li class="disabled"><a class="btn btn-default"><i class="icon-material-outline-keyboard-arrow-right"></i></a></li>
+								  <% } else { %>
+									  <li><a class="btn btn-default" onclick="changePage('<%= pages %>')"><i class="icon-material-outline-keyboard-arrow-right"></i></a></li>
+								  <% } %>
+				
+								</ul>
+							  <% } %>
+						</nav>
+					</div>
+				</div>
+			</div>
+
+			<!-- Pagination / End -->
+			<%- include('footer.html'); %>
+			
+		</div>
+	</div>
+	<!-- Dashboard Content / End -->
+
+</div>
+<!-- Dashboard Container / End -->
+
+</div>
+<!-- Wrapper / End -->
+
+
+
+
+<!-- Scripts
+================================================== -->
+<script src="<%=BaseUrl%>/adminPanel/js/jquery-3.3.1.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/mmenu.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/tippy.all.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/simplebar.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/bootstrap-slider.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/bootstrap-select.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/snackbar.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/clipboard.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/counterup.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/magnific-popup.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/slick.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/custom.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/sweetalert.min.js"></script>
+<!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
+
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script>
+
+function checkvalidateForm(){
+    var startDate = new Date($('#todate').val());
+    var endDate = new Date($('#fromdate').val());
+
+    if (startDate > endDate){
+      swal("Oops!", "To Date Should not Greater then From Date!"); 
+      return false;
+    }
+    
+    return true;
+  }
+
+  function changePage(page){
+    var isPostReq=false;
+
+   if($('#orderno').val()){
+      isPostReq=true;
+    }
+    
+    if($('#todate').val()){
+      isPostReq=true;
+    }
+    if($('#fromdate').val()){
+      isPostReq=true;
+    }
+    var link='<%=BaseUrl%>/collectionlist/'+page;
+    if(isPostReq){
+      $('#searchform').attr('action', link);
+      $('#searchform').submit();
+    }
+    else{
+     console.log('call2');
+      location.href = link;
+    }
+  }
+</script>
+
+<script>
+    $(document).ready(function () {
+         $('#insert_form').on('submit', function (event) {
+           event.preventDefault();
+           $.ajax({
+             url: "<%=BaseUrl%>/reuseparty",
+             method: "POST",
+             data: $('#insert_form').serialize(),
+ 
+             success: function (data) {
+               location.reload();
+             }
+ 
+           })
+         })
+ 
+         $(document).on('click', '.mymodel', function () {
+           var _id = $(this).attr("id");
+           $('#_id').val(_id);
+           $('#exampleModal').modal('show');
+         })
+       })
+ </script>
+
+
+</body>
+</html>

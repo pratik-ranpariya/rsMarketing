@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+	<title>Rs Marketing</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/style.css">
+	<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/colors/blue.css">
+	<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/sweetalert.min.css">
+	<style type="text/css">
+		table td {
+			display: table-cell !important;
+			width: 10% !important;
+			border-bottom: none !important;
+			background-color: #eee !important;
+		}
+
+		table th {
+			display: table-cell !important;
+			width: 10% !important;
+		}
+
+		table {
+			padding: 9px !important;
+		}
+
+		.near_by_hotel_wrapper {
+			background: #f5f5f5;
+		}
+
+		.custom_table {
+			border-collapse: separate;
+			border-spacing: 0 10px;
+			margin-top: -3px !important;
+		}
+
+		.custom_table thead tr th {
+			padding: 0px 8px;
+			font-size: 16px;
+			border: 0 none !important;
+			border-top: 0 none !important;
+		}
+
+		.custom_table tbody tr {
+			-moz-box-shadow: 0 2px 3px #e0e0e0;
+			-webkit-box-shadow: 0 2px 3px #e0e0e0;
+			box-shadow: 0 2px 3px #e0e0e0;
+		}
+
+		.near_by_hotel_wrapper table tr td {
+			border-right: 1px solid #d2d1d1;
+		}
+
+		.custom_table tbody tr td {
+			background: #fff none repeat scroll 0 0;
+			border-top: 0 none !important;
+			margin-bottom: 20px;
+			padding: 10px 8px;
+			font-size: 16px;
+		}
+
+		.near_by_hotel_wrapper table tr td {
+			border-right: 1px solid #d2d1d1;
+		}
+
+		.dialog-with-tabs .button {
+			margin-top: 0px !important;
+		}
+
+		.newbutton {
+			background-color: #fff;
+			padding: 5px 10px;
+			border-radius: 5px;
+			margin: 2px;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+		}
+
+		.responsive {
+			overflow-x: auto !important;
+		}
+
+		tr td,
+		tr th {
+			min-width: 100px !important;
+			text-align: left !important;
+		}
+	</style>
+</head>
+
+<body class="gray">
+
+
+	<div id="wrapper">
+
+		<%- include('header.html');%>
+			<div class="clearfix"></div>
+
+
+
+
+			<div class="dashboard-container">
+
+				<%- include('dashboard-leftlayout.html');%>
+
+					<div class="dashboard-content-container">
+						<div class="dashboard-content-inner">
+
+							<div class="row">
+								<div class="col-xl-6">
+									<div class="dashboard-headline">
+										<center>
+											<h3><strong>Add Agent</strong></h3>
+										</center>
+									</div>
+									<form action="<%=BaseUrl%>/insertpin" method="post">
+
+										<div class="dashboard-box margin-top-0">
+
+											<div class="content with-padding padding-bottom-10">
+												<div class="row">
+
+													<div class="col-xl-12">
+														<div class="submit-field">
+															<h5>Name</h5>
+															<input type="text" value="" class="with-border" name="name"
+																required>
+														</div>
+													</div>
+													<div class="col-xl-12">
+														<div class="submit-field">
+															<h5>Mobile Number</h5>
+															<input type="text" class="with-border" value=""
+																name="mobile" required>
+														</div>
+													</div>
+
+													<div class="col-xl-12">
+														<div class="submit-field">
+															<h5>Password</h5>
+															<input type="text" value="" class="with-border"
+																name="password" required>
+														</div>
+													</div>
+
+
+												</div>
+											</div>
+										</div>
+										<div class="col-xl-12">
+											<center>
+												<button type="submit"
+													class="post-service button ripple-effect big margin-top-30">Submit</button>
+											</center>
+										</div>
+									</form>
+								</div>
+
+
+								<div class="col-xl-6">
+									<div class="dashboard-headline">
+										<center>
+											<h3><strong>Add Party</strong></h3>
+										</center>
+									</div>
+									<form action="<%=BaseUrl%>/addpartyaccount" method="post">
+
+										<div class="dashboard-box margin-top-0">
+
+											<div class="content with-padding padding-bottom-10">
+												<div class="row">
+
+													<div class="col-xl-12">
+														<div class="submit-field">
+															<h5>Name</h5>
+															<input type="text" value="" class="with-border" name="name"
+																required>
+														</div>
+													</div>
+													<div class="col-xl-12">
+														<div class="submit-field">
+															<h5>Mobile Number</h5>
+															<input type="text" class="with-border" value=""
+																name="mobile" required>
+														</div>
+													</div>
+
+													<div class="col-xl-12">
+														<div class="submit-field">
+															<h5>Beat</h5>
+															<input type="text" value="" class="with-border"
+																name="beat" required>
+														</div>
+													</div>
+
+													<div class="col-xl-12">
+														<div class="submit-field">
+															<h5>Contact Person</h5>
+															<input type="text" value="" class="with-border"
+																name="contactperson" required>
+														</div>
+													</div>
+
+
+												</div>
+											</div>
+										</div>
+										<div class="col-xl-12">
+											<center>
+												<button type="submit"
+													class="post-service button ripple-effect big margin-top-30">Submit</button>
+											</center>
+										</div>
+									</form>
+								</div>
+
+
+							</div>
+							<br><br>
+							<%- include('footer.html'); %>
+						</div>
+					</div>
+			</div>
+	</div>
+	</div>
+	</div>
+
+	<script src="<%=BaseUrl%>/adminPanel/js/jquery-3.3.1.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/jquery-migrate-3.0.0.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/mmenu.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/tippy.all.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/simplebar.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/bootstrap-slider.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/bootstrap-select.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/snackbar.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/clipboard.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/counterup.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/magnific-popup.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/slick.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/custom.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/sweetalert.min.js"></script>
+
+	<script>
+
+		function checkvalidateForm() {
+			var startDate = new Date($('#todate').val());
+			var endDate = new Date($('#fromdate').val());
+			var d = new Date();
+			d.setSeconds(0, 0);
+
+			if (endDate < d) {
+				swal("Oops!", "Please Not Insert Previous date!");
+				return false;
+			} else if (startDate < endDate) {
+				swal("Oops!", "To Date Should not Greater then From Date!");
+				return false;
+			}
+
+			return true;
+		}
+
+		function changePage(page) {
+			var isPostReq = false;
+
+			if ($('#orderno').val()) {
+				isPostReq = true;
+			}
+
+			if ($('#todate').val()) {
+				isPostReq = true;
+			}
+			if ($('#fromdate').val()) {
+				isPostReq = true;
+			}
+			var link = '<%=BaseUrl%>/ph_link/' + page;
+			if (isPostReq) {
+				$('#searchform').attr('action', link);
+				$('#searchform').submit();
+			}
+			else {
+				console.log('call2');
+				location.href = link;
+			}
+		}
+	</script>
+
+</body>
+
+</html>

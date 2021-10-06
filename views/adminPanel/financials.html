@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<title>Rs Marketing</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/style.css">
+<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/colors/blue.css">
+<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/sweetalert.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<style type="text/css">
+table td{
+	display: table-cell !important;
+	width: 10% !important;
+	border-bottom: none !important;
+	background-color: #eee !important;
+}
+table th{
+	display: table-cell !important;
+	width: 10% !important;
+}
+table{
+	padding: 9px !important;
+}
+.near_by_hotel_wrapper{
+	background:#f5f5f5;
+	}
+.custom_table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-top: -3px !important;
+}
+.custom_table thead tr th {
+	padding: 0px 8px;
+	font-size: 16px;
+	border: 0 none !important;
+	border-top: 0 none !important;
+}
+.custom_table tbody tr {
+    -moz-box-shadow: 0 2px 3px #e0e0e0;
+    -webkit-box-shadow: 0 2px 3px #e0e0e0;
+    box-shadow: 0 2px 3px #e0e0e0;
+}
+.near_by_hotel_wrapper table tr td {
+	border-right: 1px solid #d2d1d1;
+}
+
+.custom_table tbody tr td {
+	background: #fff none repeat scroll 0 0;
+	border-top: 0 none !important;
+	margin-bottom: 20px;
+	padding: 10px 8px;
+	font-size: 16px;
+}
+.near_by_hotel_wrapper table tr td {
+    border-right: 1px solid #d2d1d1;
+}	
+</style>
+</head>
+<body class="gray">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header Container
+================================================== -->
+<!-- <?php include('header.php');?> -->
+<%- include ('header.html'); %>
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+
+<!-- Dashboard Container -->
+<div class="dashboard-container">
+
+
+
+	<%- include ('dashboard-leftlayout.html'); %>
+	<div class="modal fade" id="createReceipt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Add Receipt</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+	
+				<form action="<%=BaseUrl%>/addreceipt" method="post">
+					<div class="dashboard-box margin-top-0">
+						<div class="content with-padding padding-bottom-10">
+							<div class="row">
+	
+								<div class="col-xl-12">
+									<div class="submit-field">
+										<h5>Party Name</h5>
+										<input type="text" value="" class="with-border" name="name" required>
+									</div>
+								</div>
+								<div class="col-xl-12">
+									<div class="submit-field">
+										<!-- <h5>Agent Name</h5> -->
+										<h5>Received By</h5>
+										<input type="text" class="with-border" value="" name="agentname" required>
+									</div>
+								</div>
+	
+								<div class="col-xl-12">
+									<div class="submit-field">
+										<h5>Amount</h5>
+										<input type="text" value="" class="with-border" name="amount" required>
+									</div>
+								</div>
+
+								<div class="col-xl-12">
+									<div class="submit-field">
+										<h5>Mobile Number</h5>
+										<input type="text" value="" class="with-border" name="mobile" required>
+									</div>
+								</div>
+
+								<div class="col-xl-12">
+									<div class="submit-field">
+										<h5>Remark</h5>
+										<input type="text" value="" class="with-border" name="remark" required>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" value="submit" name="submit" id="submit"
+							class="btn btn-primary">submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="createPayment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Add Payment</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+	
+				<form action="<%=BaseUrl%>/addpayment" method="post">
+					<div class="dashboard-box margin-top-0">
+						<div class="content with-padding padding-bottom-10">
+							<div class="row">
+	
+								<div class="col-xl-12">
+									<div class="submit-field">
+										<h5>Party Name</h5>
+										<input type="text" value="" class="with-border" name="partyname" required>
+									</div>
+								</div>
+								<div class="col-xl-12">
+									<div class="submit-field">
+										<h5>Amount</h5>
+										<input type="text" class="with-border" value="" name="amount" required>
+									</div>
+								</div>
+	
+								<div class="col-xl-12">
+									<div class="submit-field">
+										<h5>Mobile Number</h5>
+										<input type="text" value="" class="with-border" name="mobile" required>
+									</div>
+								</div>
+
+								<div class="col-xl-12">
+									<div class="submit-field">
+										<h5>Remark</h5>
+										<input type="text" value="" class="with-border" name="remark" required>
+									</div>
+								</div>
+
+								<div class="col-xl-12">
+									<div class="submit-field">
+										<h5>Paid By</h5>
+										<input type="text" value="" class="with-border" name="paidby" required>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" id="submit"
+							class="btn btn-primary">submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="dashboard-content-container" data-simplebar>
+		<div class="dashboard-content-inner" >
+			
+			<!-- Dashboard Headline -->
+			<div class="dashboard-headline">
+				<form method="post" action="/obalance">
+					<div class="row">
+						<div class="col-xl-3">
+							<div class="submit-field">
+						<input type="number" value="" name="amount" placeholder="opening balance">
+						</div>
+						</div>
+						<input type="submit" name="submit">
+					</div>
+				</form>
+				<!-- <h5>Total Receipts: <%= total %></h5>
+					<h5>Total Payments: <%= ptotal %></h5>
+					<h5>Final Balance: <%= ptotal - total %></h5> -->
+					<div class="row mb-3" >
+						<div class="col-xl-3 col-md-3 responsive">
+							<button type="button" style="border: solid 2px blue; color: blue; padding: 6px; border-radius: 5px; ">Total Receipts: <%= total %></button>
+						</div>
+						<div class="col-xl-3 col-md-3 responsive">
+							<button type="button" style="border: solid 2px blue; color: blue; padding: 6px; border-radius: 5px;">Total Payments: <%= ptotal %></button>
+						</div>
+						<div class="col-xl-3 col-md-3 responsive">
+							<button type="button" style="border: solid 2px blue; color: blue; padding: 6px; border-radius: 5px;">Final Balance: <%= total + openingTotalBalance - ptotal %></button>
+						</div>
+						<div class="col-xl-3 col-md-3 responsive">
+							<button type="button" style="border: solid 2px blue; color: blue; padding: 6px; border-radius: 5px;">Opening Balance: <%= openingTotalBalance %></button>
+						</div>
+					</div>
+				</div>
+			<!-- Row -->
+		<div class="row">
+
+			<div class="col-xl-6 col-md-12 responsive">
+				<button class="btn btn-primary mb-3 createReceipt" type="button" style="display: block;">
+					Create Receipt
+				</button>
+				<table class="table no-border custom_table dataTable no-footer dtr-inline" style="width: 100%;background-color:#fff;">
+				    <thead>
+				      <tr>
+						<th>S.No</th>
+				        <th>PartyName</th>
+						<th>ReceivedBy</th>
+                        <th class="text-center">Amount</th>
+						<th>Mobile</th>
+						<th>Remark</th>
+						<!-- <th>Date</th> -->
+				      </tr>
+				    </thead>
+				    <tbody style="background-color: #eee;" id="services">
+				    	<% if (data.length > 0) { var con = 1; %>
+								<% for(var i = 0; i < data.length; i++ ) { %>
+				    			<tr>
+									<td><%= con %></td>
+					    			<td><%= data[i].name %></td>
+									<td><%= data[i].agentname %></td>
+                                    <td><%= data[i].amount%></td>
+									<td><%= data[i].mobile%></td>
+									<td><%= data[i].remark%></td>
+									<!-- <td><%= data[i].date%></td> -->
+					    		</tr>
+				    	<% con++; } }
+				    	  else
+				    	  {
+				    		%>
+				    		<tr>
+				    			<td colspan="10"><center>No Record Found!</center></td>
+				    		</tr>
+				    	<% } %>
+				    </tbody>
+				  </table>
+			</div>	
+
+			<div class="col-xl-6 col-md-12 responsive">
+				<button class="btn btn-primary mb-3 createPayment" type="button" style="display: block;">
+					Create Payment
+				</button>
+				<table class="table no-border custom_table dataTable no-footer dtr-inline" style="width: 100%;background-color:#fff;">
+				    <thead>
+				      <tr>
+						<th>S.No</th>
+				        <th>PartyName</th>
+                        <th>Amount</th>
+						<th>Mobile</th>
+						<th>Remark</th>
+						<th>paidby</th>
+				      </tr>
+				    </thead>
+				    <tbody style="background-color: #eee;" id="services">
+				    	<% if (payment.length > 0) { var con = 1; %>
+								<% for(var i = 0; i < payment.length; i++ ) { %>
+				    			<tr>
+									<td><%= con %></td>
+					    			<td><%= payment[i].partyname %></td>
+									<td><%= payment[i].amount %></td>
+                                    <td><%= payment[i].mobile%></td>
+									<td><%= payment[i].remark%></td>
+									<td><%= payment[i].paidby%></td>
+					    		</tr>
+				    	<% con++; } }
+				    	  else
+				    	  {
+				    		%>
+				    		<tr>
+				    			<td colspan="10"><center>No Record Found!</center></td>
+				    		</tr>
+				    	<% } %>
+				    </tbody>
+				  </table>
+			</div>	
+
+			<div class="col-xl-6 col-md-12 responsive">
+				<table class="table no-border custom_table dataTable no-footer dtr-inline" style="width: 100%;background-color:#fff;">
+				    <thead>
+				      <tr>
+						<th>S.No</th>
+                        <th>Amount</th>
+				      </tr>
+				    </thead>
+				    <tbody style="background-color: #eee;" id="services">
+				    	<% if (obalance.length > 0) { var con = 1; %>
+								<% for(var i = 0; i < obalance.length; i++ ) { %>
+				    			<tr>
+									<td><%= con %></td>
+									<td><%= obalance[i].amount %></td>
+					    		</tr>
+				    	<% con++; } }
+				    	  else
+				    	  {
+				    		%>
+				    		<tr>
+				    			<td colspan="10"><center>No Record Found!</center></td>
+				    		</tr>
+				    	<% } %>
+				    </tbody>
+				  </table>
+			</div>	
+
+		</div>
+	<%- include('footer.html'); %>			
+		</div>
+	</div>
+</div>
+</div>
+
+
+
+
+<!-- Scripts
+================================================== -->
+<script src="<%=BaseUrl%>/adminPanel/js/jquery-3.3.1.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/jquery-migrate-3.0.0.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/mmenu.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/tippy.all.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/simplebar.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/bootstrap-slider.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/bootstrap-select.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/snackbar.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/clipboard.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/counterup.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/magnific-popup.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/slick.min.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/custom.js"></script>
+<script src="<%=BaseUrl%>/adminPanel/js/sweetalert.min.js"></script>
+<!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
+
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+<!-- <script>
+    $(document).ready(function () {
+         $('#insert_form').on('submit', function (event) {
+           event.preventDefault();
+           $.ajax({
+             url: "<%=BaseUrl%>/insertnotes",
+             method: "POST",
+             data: $('#insert_form').serialize(),
+ 
+             success: function (data) {
+               location.reload();
+             }
+ 
+           })
+         })
+ 
+         $(document).on('click', '.mymodel', function () {
+           var _id = $(this).attr("id");
+           $('#_id').val(_id);
+           $('#exampleModal').modal('show');
+         })
+       })
+ </script> -->
+
+ <script>
+		$(document).ready(function () {
+			$(document).on('click', '.createReceipt', function () {
+				$('#createReceipt').modal('show');
+			})
+			$(document).on('click', '.createPayment', function () {
+				$('#createPayment').modal('show');
+			})
+		})
+ </script>
+
+
+</body>
+</html>

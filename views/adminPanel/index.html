@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>Rs Marketing | Login</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/style.css?v=1">
+<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/colors/blue.css">
+<style type="text/css">
+@media(max-width:1099px) {
+    #logo img {
+        border: none;
+        max-width: 160px !important;
+        height: auto
+    }
+}    
+</style>
+</head>
+<body class="gray">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Dashboard Container -->
+<div class="dashboard-container">
+
+    <!-- Dashboard Content
+    ================================================== -->
+    <div class="dashboard-content-container" data-simplebar>
+        <div class="dashboard-content-inner" style="padding-top: 20px !important;">
+            <div class="row">
+
+                <!-- Dashboard Box -->
+                <div class="col-xl-4 offset-xl-4" style="padding-left: 0px;padding-right: 0px;">
+                    <div class="dashboard-box margin-top-0">
+
+                        <!-- Headline -->
+                        <div class="headline">
+                            <h3> RS MARKETING</h3>
+                        </div>
+
+                        <div class="content with-padding padding-bottom-10">
+                            <div class="row">
+
+                            <form action="<%=BaseUrl%>/login" method="post" id="login-form" style="width: 200% !important">
+                                <div class="col-xl-12">
+                                    <div class="submit-field">
+                                        <h5>Mobile Number</h5>
+                                        <input type="name" class="with-border" name="Mobile_no" id="emailaddress" placeholder="Enter Username">
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-12">
+                                    <div class="submit-field">
+                                        <h5>Password</h5>
+                                        <input type="password" class="with-border" name="password" id="password" placeholder="Enter Password">
+                                    </div>
+                                </div>
+                                <div class="col-xl-12">
+                                    <% if(msg) { %> <%= msg %> <%}%>
+                                    <% if(msgs) {%><%= msgs %> <%}%>
+                            </div>                                
+                            <div class="col-xl-12">
+                                    <div class="submit-field">
+                                        <button type="submit" form="login-form" class="button ripple-effect big margin-top-30"> Login</button>
+                                    </div>
+                                </div>
+<!--
+                           <span href="#small-dialog-2"  class="popup-with-zoom-anim log-in-button forgot-password"> <a class="forgot-password">Forgot Password?</a></span>
+    -->                        
+                            </form> 
+                              </div>
+                                
+                            </div>
+
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Dashboard Container / End -->
+
+</div>
+<!-- Wrapper / End -->
+    <div id="small-dialog-2" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+        <div class="sign-in-form">
+            <ul class="popup-tabs-nav">
+                <li><a href="#tab">Add Portfolio</a></li>
+            </ul>
+            <div class="popup-tabs-container">
+                <div class="popup-tab-content" id="tab2">   
+                    <form action="<?php URL ?>backend.php?service=forgetPassword" method="post" id="add-subcategory" enctype="multipart/form-data">
+
+                        <input type="text" name="username" cols="10" placeholder="New Username" class="with-border">
+                        <input type="text" name="password" cols="10" placeholder="New Password" class="with-border">   
+                        <input type="text" name="mobile" cols="10" id="forget-mobile-no" placeholder="Enter mobile" class="with-border">
+                    
+                    </form>
+                    <button class="button full-width button-sliding-icon ripple-effect" type="submit" form="add-subcategory">Add Employees <i class="icon-material-outline-arrow-right-alt"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+	<title>Rs Marketing</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+	<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/style.css">
+	<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/colors/blue.css">
+	<link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/sweetalert.min.css">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
+
+	<style type="text/css">
+		table td {
+			display: table-cell !important;
+			width: 10% !important;
+			border-bottom: none !important;
+			background-color: #eee !important;
+		}
+
+		table th {
+			display: table-cell !important;
+			width: 10% !important;
+		}
+
+		table {
+			padding: 9px !important;
+		}
+
+		.near_by_hotel_wrapper {
+			background: #f5f5f5;
+		}
+
+		.custom_table {
+			border-collapse: separate;
+			border-spacing: 0 10px;
+			margin-top: -3px !important;
+		}
+
+		.custom_table thead tr th {
+			padding: 0px 8px;
+			font-size: 16px;
+			border: 0 none !important;
+			border-top: 0 none !important;
+		}
+
+		.custom_table tbody tr {
+			-moz-box-shadow: 0 2px 3px #e0e0e0;
+			-webkit-box-shadow: 0 2px 3px #e0e0e0;
+			box-shadow: 0 2px 3px #e0e0e0;
+		}
+
+		.near_by_hotel_wrapper table tr td {
+			border-right: 1px solid #d2d1d1;
+		}
+
+		.custom_table tbody tr td {
+			background: #fff none repeat scroll 0 0;
+			border-top: 0 none !important;
+			margin-bottom: 20px;
+			padding: 10px 8px;
+			font-size: 16px;
+		}
+
+		.near_by_hotel_wrapper table tr td {
+			border-right: 1px solid #d2d1d1;
+		}
+	</style>
+</head>
+
+<body class="gray">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<%- include ('header.html'); %>
+			<div class="clearfix"></div>
+			<!-- Header Container / End -->
+
+
+			<!-- Dashboard Container -->
+			<div class="dashboard-container">
+
+				<%- include ('dashboard-leftlayout.html'); %>
+					<!-- <?php include('dashboard-leftlayout.php');?> -->
+					<!-- Dashboard Content
+	================================================== -->
+					<div class="dashboard-content-container" data-simplebar>
+						<div class="dashboard-content-inner">
+
+							<!-- Dashboard Headline -->
+							<div class="dashboard-headline">
+								<h3>agentlist</h3>
+							</div>
+							<!-- Row -->
+							<div class="row">
+
+								<div class="col-xl-12 col-lg-12 content-left-offset">
+
+									<div class="notify-box margin-top-15 margin-bottom-60">
+
+										<div class="col-md-12">
+											<form id="searchform" action="/agentlist/1" method="post"
+												onsubmit="return checkvalidateForm();">
+												<div class="row">
+
+													<div class="form-group col-md-2">
+														<label>Search Mobile:</label>
+														<input type="text" class="form-control" name="mobile"
+															placeholder="Mobile Number"
+															value="<%if(search['mobile'] != '') {%><%=search['mobile']%><%}%>">
+													</div>
+													<div class="form-group col-md-2">
+														<label>To Date:</label>
+														<input type="date" class="form-control" id="todate"
+															name="todate" placeholder="By Date"
+															value="<%if(search['todate'] != '') {%><%=search['todate']%><%}%>">
+													</div>
+													<div class="form-group col-md-2">
+														<label>From Date:</label>
+														<input type="date" class="form-control" id="fromdate"
+															name="fromdate" placeholder="By Date"
+															value="<%if(search['fromdate'] != '') {%><%=search['fromdate']%><%}%>">
+													</div>
+													<div class="form-group col-md-2">
+														<label>&nbsp;</label>
+														<input type="submit" class="form-control btn btn-success"
+															value="Search">
+														<!-- <button class="form-control btn btn-lg btn-success">Search</button> -->
+													</div>
+													<div class="form-group col-md-2">
+														<label>&nbsp;</label>
+														<input type="button"
+															class="form-control btn-success callagentlistapi"
+															value="Export CSV">
+													</div>
+												</div>
+											</form>
+
+
+
+										</div>
+
+									</div>
+								</div>
+
+								<div class="col-xl-12 col-md-12 responsive">
+									<table class="table no-border custom_table dataTable no-footer dtr-inline"
+										style="width: 100%;background-color:#fff;">
+										<thead>
+											<tr>
+												<th>S.No</th>
+												<th>Name</th>
+												<th>Mobile Number</th>
+												<th>Password</th>
+												<th>Register Date</th>
+											</tr>
+										</thead>
+										<tbody style="background-color: #eee;" id="services">
+											<% if (data.length> 0) { var con = 1; %>
+												<% for(var i=0; i < data.length; i++ ) { %>
+													<tr>
+														<td>
+															<%= con %>
+														</td>
+														<td><a href="<%=BaseUrl%>/agentDetails/<%= data[i].agentId %>">
+																<%= data[i].name %>
+															</a></td>
+														<td>
+															<%= data[i].mobile %>
+														</td>
+														<td>
+															<%= data[i].password%>
+														</td>
+														<td>
+															<%= data[i].date%>
+														</td>
+													</tr>
+													<% con++; } } else { %>
+														<tr>
+															<td colspan="10">
+																<center>No Record Found!</center>
+															</td>
+														</tr>
+														<% } %>
+										</tbody>
+									</table>
+								</div>
+
+							</div>
+							<!-- Pagination -->
+							<div class="clearfix"></div>
+							<div class="row">
+								<div class="col-md-12">
+									<!-- Pagination -->
+									<div class="pagination-container margin-top-30 margin-bottom-60">
+										<nav class="pagination">
+											<% if (pages> 0) { %>
+												<ul class="pagination justify-content-end" id="pagination">
+													<% if (current==1) { %>
+														<li class="disabled"><a class="btn btn-default"><i
+																	class="icon-material-outline-keyboard-arrow-left"></i></a>
+														</li>
+														<% } else { %>
+															<li><a class="btn btn-default" onclick="changePage('1')"><i
+																		class="icon-material-outline-keyboard-arrow-left"></i></a>
+															</li>
+															<% } %>
+																<% var i=(Number(current)> 5 ? Number(current) - 4 : 1)
+																	%>
+																	<% if (i !==1) { %>
+																		<li class="disabled"><a>...</a></li>
+																		<% } %>
+																			<% for (; i <=(Number(current) + 4) && i
+																				<=pages; i++) { %>
+																				<% if (i==current) { %>
+																					<li class="pagination-arrow"
+																						class="active"><a
+																							class="btn btn-default">
+																							<%= i %>
+																						</a></li>
+																					<% } else { %>
+																						<li><a class="btn btn-default"
+																								onclick="changePage('<%= i %>')">
+																								<%= i %>
+																							</a></li>
+																						<% } %>
+																							<% if (i==Number(current) +
+																								4 && i < pages) { %>
+																								<li class="disabled">
+																									<a>...</a></li>
+																								<% } %>
+																									<% } %>
+																										<% if
+																											(current==pages)
+																											{ %>
+																											<li
+																												class="disabled">
+																												<a
+																													class="btn btn-default"><i
+																														class="icon-material-outline-keyboard-arrow-right"></i></a>
+																											</li>
+																											<% } else {
+																												%>
+																												<li><a class="btn btn-default"
+																														onclick="changePage('<%= pages %>')"><i
+																															class="icon-material-outline-keyboard-arrow-right"></i></a>
+																												</li>
+																												<% } %>
+
+												</ul>
+												<% } %>
+										</nav>
+									</div>
+								</div>
+							</div>
+
+							<!-- Pagination / End -->
+							<%- include('footer.html'); %>
+
+						</div>
+					</div>
+					<!-- Dashboard Content / End -->
+
+			</div>
+			<!-- Dashboard Container / End -->
+
+	</div>
+	<!-- Wrapper / End -->
+
+
+
+
+	<!-- Scripts
+================================================== -->
+	<script src="<%=BaseUrl%>/adminPanel/js/jquery-3.3.1.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/jquery-migrate-3.0.0.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/mmenu.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/tippy.all.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/simplebar.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/bootstrap-slider.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/bootstrap-select.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/snackbar.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/clipboard.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/counterup.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/magnific-popup.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/slick.min.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/custom.js"></script>
+	<script src="<%=BaseUrl%>/adminPanel/js/sweetalert.min.js"></script>
+	<!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
+
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+
+
+	<script>
+
+		function checkvalidateForm() {
+			var startDate = new Date($('#todate').val());
+			var endDate = new Date($('#fromdate').val());
+
+			if (startDate > endDate) {
+				swal("Oops!", "To Date Should not Greater then From Date!");
+				return false;
+			}
+
+			return true;
+		}
+
+		function changePage(page) {
+			var isPostReq = false;
+
+			if ($('#orderno').val()) {
+				isPostReq = true;
+			}
+
+			if ($('#todate').val()) {
+				isPostReq = true;
+			}
+			if ($('#fromdate').val()) {
+				isPostReq = true;
+			}
+			var link = '<%=BaseUrl%>/agentlist/' + page;
+			if (isPostReq) {
+				$('#searchform').attr('action', link);
+				$('#searchform').submit();
+			}
+			else {
+				//  console.log('call2');
+				location.href = link;
+			}
+		}
+
+		$(document).ready(function () {
+			$(document).on('click', '.callagentlistapi', function () {
+				// $('#exampleModal').modal('show');
+				$.ajax({
+					type: 'get',
+					url: '/getagentlistdata',
+					crossDomain: true,
+					success: function (response) {
+
+						downloadcsv(response)
+
+					},
+					error: function (request, status, error) {
+
+						alert(error);
+					}
+				});
+			})
+		})
+
+		function downloadcsv(data) {
+			var csv = 'Agent code,Name,mobile,password,date\n';
+
+			var array = [];
+			for (let i = 0; i < data.length; i++) {
+				const x = data[i]
+				array.push([x.agentId, x.name, x.mobile, x.password, x.date])
+			}
+
+			array.forEach(function (row) {
+				csv += row.join(',');
+				csv += "\n";
+			})
+
+			var hiddenElement = document.createElement('a');
+			hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+			hiddenElement.target = '_blank';
+
+			hiddenElement.download = 'Agentlist.csv';
+			hiddenElement.click();
+		}
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <title>Rs Marketing</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/style.css">
+    <link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/colors/blue.css">
+    <link rel="stylesheet" href="<%=BaseUrl%>/adminPanel/css/sweetalert.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <style type="text/css">
+        .dropbtn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        /* .dropdown {
+  position: relative;
+  display: inline-block;
+} */
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content li a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content li a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+
+<body class="gray">
+    <div id="wrapper">
+
+        <%- include ('header.html'); %>
+            <div class="clearfix"></div>
+            <div class="dashboard-container">
+
+                <div class="modal fade" id="dailycollectiontask" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">daily Collection Task</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="<%=BaseUrl%>/insertparty" method="post">
+                                <div class="dashboard-box margin-top-0">
+                                    <div class="content with-padding padding-bottom-10">
+                                        <div class="row">
+                                            <!-- <div class="col-xl-6">
+                                                        <div class="submit-field">
+                                                            <h5>Party Name</h5>
+                                                            <input type="text" value="" class="with-border" name="name" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <div class="submit-field">
+                                                            <h5>Party Address</h5>
+                                                            <input type="text" class="with-border" value="" name="address" required>
+                                                        </div>
+                                                    </div>
+                
+                                                    <div class="col-xl-6">
+                                                        <div class="submit-field">
+                                                            <h5>Party Contact</h5>
+                                                            <input type="number" value="" class="with-border" name="contact" required>
+                                                        </div>
+                                                    </div> -->
+                                            <div class="col-xl-12">
+                                                <div class="submit-field">
+                                                    <h5>Select Agent</h5>
+                                                    <select id="cars" name="agentId" required>
+                                                        <option value="">Select Agent</option>
+                                                        <% for(var i=0; i < data.length; i++ ) { %>
+                                                            <option value="<%= data[i].agentId %>">
+                                                                <%= data[i].name %>
+                                                            </option>
+                                                            <% } %>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-12">
+                                                <div class="submit-field">
+                                                    <h5>Select Beat</h5>
+                                                    <select id="cars" name="beat" required>
+                                                        <option value="">Select Beat</option>
+                                                        <% for(var i=0; i < party.length; i++ ) { %>
+                                                            <option value="<%= party[i].beat %>">
+                                                                <%= party[i].beat %>
+                                                            </option>
+                                                            <% } %>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-12">
+                                                <div class="submit-field">
+                                                    <h5>Select Party</h5>
+                                                    <select id="cars" name="partyId" required>
+                                                        <option value="">Select Party</option>
+                                                        <% for(var i=0; i < party.length; i++ ) { %>
+                                                            <option value="<%= party[i].partyId %>">
+                                                                <%= party[i].name %>
+                                                            </option>
+                                                            <% } %>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-12">
+                                                <div class="submit-field">
+                                                    <h5>Amount</h5>
+                                                    <input type="number" value="" class="with-border" name="amount"
+                                                        required>
+                                                </div>
+                                            </div>
+
+                                            <!-- <div class="col-xl-12">
+                                                <div class="submit-field">
+                                                    <h5>Beat</h5>
+                                                    <input type="text" value="" class="with-border" name="beat"
+                                                        required>
+                                                </div>
+                                            </div> -->
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" value="submit" name="submit" id="submit"
+                                        class="btn btn-primary">submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="newNotes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">daily Collection Task</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="<%=BaseUrl%>/insertnotes" method="post">
+                                <div class="dashboard-box margin-top-0">
+                                    <div class="content with-padding padding-bottom-10">
+                                        <div class="row">
+                                            <div class="col-xl-12">
+                                                <div class="submit-field">
+                                                    <h5>Notes</h5>
+                                                    <textarea name="note" rows="5"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12">
+                                                <div class="submit-field">
+                                                    <h5>Select Agent</h5>
+                                                    <select id="cars" name="agentId" required>
+                                                        <option value="">Select Agent</option>
+                                                        <option value="all">all agent</option>
+                                                        <% for(var i=0; i < data.length; i++ ) { %>
+                                                            <option value="<%= data[i].agentId %>">
+                                                                <%= data[i].name %>
+                                                            </option>
+                                                            <% } %>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" value="submit" name="submit" id="submit"
+                                        class="btn btn-primary">submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="agentModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Add Agent</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <form action="<%=BaseUrl%>/insertpin" method="post">
+                                <div class="dashboard-box margin-top-0">
+                                    <div class="content with-padding padding-bottom-10">
+                                        <div class="row">
+
+                                            <div class="col-xl-12">
+                                                <div class="submit-field">
+                                                    <h5>Name</h5>
+                                                    <input type="text" value="" class="with-border" name="name"
+                                                        required>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12">
+                                                <div class="submit-field">
+                                                    <h5>Mobile Number</h5>
+                                                    <input type="text" class="with-border" value="" name="mobile"
+                                                        required>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-12">
+                                                <div class="submit-field">
+                                                    <h5>Password</h5>
+                                                    <input type="text" value="" class="with-border" name="password"
+                                                        required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" value="submit" name="submit" id="submit"
+                                        class="btn btn-primary">submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="partyModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Add Party</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <form action="<%=BaseUrl%>/addpartyaccount" method="post">
+                                <div class="dashboard-box margin-top-0">
+                                    <div class="content with-padding padding-bottom-10">
+                                        <div class="row">
+
+                                            <div class="col-xl-12">
+                                                <div class="submit-field">
+                                                    <h5>Name</h5>
+                                                    <input type="text" value="" class="with-border" name="name"
+                                                        required>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12">
+                                                <div class="submit-field">
+                                                    <h5>Mobile Number</h5>
+                                                    <input type="text" class="with-border" value="" name="mobile"
+                                                        required>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-12">
+                                                <div class="submit-field">
+                                                    <h5>Beat</h5>
+                                                    <input type="text" value="" class="with-border" name="beat"
+                                                        required>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-12">
+                                                <div class="submit-field">
+                                                    <h5>Contact Person</h5>
+                                                    <input type="text" value="" class="with-border" name="contactperson"
+                                                        required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" value="submit" name="submit" id="submit"
+                                        class="btn btn-primary">submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="DCD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <h5 class="modal-title" id="exampleModalLabel">Download Collection data</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <form id="downloadcollectiondata">
+                                <div class="modal-body">
+
+                                    <div class="col-xl-12">
+                                        <div class="submit-field">
+                                            <h5>Select Agent</h5>
+                                            <select id="cars" name="agentId" required>
+                                                <option value="">Select Agent</option>
+                                                <% for(var i=0; i < data.length; i++ ) { %>
+                                                    <option value="<%= data[i].agentId %>">
+                                                        <%= data[i].name %>
+                                                    </option>
+                                                    <% } %>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-12">
+                                        <div class="submit-field">
+                                            <h5>Select Party</h5>
+                                            <select id="cars" name="partyId" required>
+                                                <option value="">Select Party</option>
+                                                <% for(var i=0; i < party.length; i++ ) { %>
+                                                    <option value="<%= party[i].partyId %>">
+                                                        <%= party[i].name %>
+                                                    </option>
+                                                    <% } %>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-12">
+                                        <div class="submit-field">
+                                            <h5>from Date</h5>
+                                            <input type="date" value="" class="with-border" name="from" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12">
+                                        <div class="submit-field">
+                                            <h5>To Date</h5>
+                                            <input type="date" class="with-border" value="" name="to" required>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" value="submit" name="submit" id="submit"
+                                        class="btn btn-primary">submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <%- include ('dashboard-leftlayout.html'); %>
+
+                    <div class="dashboard-content-container" data-simplebar>
+                        <div class="dashboard-content-inner row">
+
+                            <div class="dropdown col-md-3 col-sm-12">
+                                <button class="btn btn-secondary dropdown-toggle p-3" type="button"
+                                    style="display: block;" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Create New
+                                </button>
+                                <ul class="dropdown-content">
+                                    <li><a class="dropdown-item agentModel" href="#">Create / Edit new Agent</a></li>
+                                    <li><a class="dropdown-item partyModel" href="#">Create / Edit new Party</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="dropdown col-md-3 col-sm-12">
+                                <button class="btn btn-success dropdown-toggle p-3" type="button"
+                                     data-bs-toggle="dropdown" aria-expanded="false">
+                                    Assign
+                                </button>
+                                <ul class="dropdown-content">
+                                    <li><a class="dropdown-item DCT" href="#">Daily Collection Task</a></li>
+                                    <li><a class="dropdown-item addNotes" href="#">Create New Notes</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="dropdown col-md-3 col-sm-12">
+                                <button class="btn btn-warning dropdown-toggle p-3" type="button"
+                                     data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
+                                    View Download
+                                </button>
+                                <ul class="dropdown-content">
+                                    <li><a class="dropdown-item" href="partylist/1">Party List</a></li>
+                                    <li><a class="dropdown-item" href="agentlist/1">Agent List</a></li>
+                                    <li><a class="dropdown-item" href="collectionlist/1">Daily Collection status</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="notelist/1">Note status</a></li>
+                                    <li><a class="dropdown-item DCD" href="#">Download Collection status</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="dropdown col-md-3 col-sm-12 justify-content-center">
+                                <a href="/financials">
+                                    <button class="btn btn-danger p-3" type="button">
+                                        Financials
+                                    </button>
+                                </a>
+                            </div>
+
+                            <%- include('footer.html'); %>
+
+                        </div>
+                    </div>
+            </div>
+    </div>
+
+    <script src="<%=BaseUrl%>/adminPanel/js/jquery-3.3.1.min.js"></script>
+    <script src="<%=BaseUrl%>/adminPanel/js/jquery-migrate-3.0.0.min.js"></script>
+    <script src="<%=BaseUrl%>/adminPanel/js/mmenu.min.js"></script>
+    <script src="<%=BaseUrl%>/adminPanel/js/tippy.all.min.js"></script>
+    <script src="<%=BaseUrl%>/adminPanel/js/simplebar.min.js"></script>
+    <script src="<%=BaseUrl%>/adminPanel/js/bootstrap-slider.min.js"></script>
+    <script src="<%=BaseUrl%>/adminPanel/js/bootstrap-select.min.js"></script>
+    <script src="<%=BaseUrl%>/adminPanel/js/snackbar.js"></script>
+    <script src="<%=BaseUrl%>/adminPanel/js/clipboard.min.js"></script>
+    <script src="<%=BaseUrl%>/adminPanel/js/counterup.min.js"></script>
+    <script src="<%=BaseUrl%>/adminPanel/js/magnific-popup.min.js"></script>
+    <script src="<%=BaseUrl%>/adminPanel/js/slick.min.js"></script>
+    <script src="<%=BaseUrl%>/adminPanel/js/custom.js"></script>
+    <script src="<%=BaseUrl%>/adminPanel/js/sweetalert.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '.partyModel', function () {
+                $('#partyModel').modal('show');
+            })
+            $(document).on('click', '.agentModel', function () {
+                $('#agentModel').modal('show');
+            })
+            $(document).on('click', '.DCT', function () {
+                $('#dailycollectiontask').modal('show');
+            })
+            $(document).on('click', '.addNotes', function () {
+                $('#newNotes').modal('show');
+            })
+            $(document).on('click', '.DCD', function () {
+                $('#DCD').modal('show');
+            })
+            $('#downloadcollectiondata').on('submit', function (event) {
+                event.preventDefault();
+                console.log('---');
+                $.ajax({
+                    url: "/downloadcollectiondata",
+                    method: "POST",
+                    data: $('#downloadcollectiondata').serialize(),
+
+                    success: function (data) {
+
+                        if (data[0]) {
+                            downloadcsv(data)
+                        } else {
+                            alert('no data found')
+                        }
+                    }
+                })
+            })
+        })
+
+        function downloadcsv(data) {
+            var csv = 'Agent code,Party Code,Party Name,contact,amount,remark,beat,payemnt menthod,notes,status,created by,date\n';
+
+            var array = [];
+            for (let i = 0; i < data.length; i++) {
+                const x = data[i]
+                array.push([x.agentId, x.partyId, x.name, x.contact, x.amount, x.remark, x.beat, x.paymentMenthod, x.notes, x.status, x.createdBy, x.date])
+            }
+
+            array.forEach(function (row) {
+                csv += row.join(',');
+                csv += "\n";
+            })
+
+            var hiddenElement = document.createElement('a');
+            hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+            hiddenElement.target = '_blank';
+
+            hiddenElement.download = 'collectionData.csv';
+            hiddenElement.click();
+        }
+
+    </script>
+
+
+</body>
+
+</html>
